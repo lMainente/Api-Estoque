@@ -7,6 +7,13 @@ class ItensEstoque extends Model
 {
     protected $table = 'itensestoque';
 
-    protected $fillable = ['Nome', 'Categoria', 'Preco', 'Descricao', 'Quantidade'];
+    protected $fillable = [
+    
+    'Nome', 
+    'Categoria', 
+    'Preco', 
+    'Descricao', 
+    'Quantidade'
+];
    
 }

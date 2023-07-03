@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Response;
 use App\Models\ItensEstoque;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Validator;
+use Illuminate\Support\Facades\DB;
 
 class ItensEstoqueController extends Controller
 {
@@ -61,4 +63,47 @@ class ItensEstoqueController extends Controller
     
         return Response::json($itensEstoque, 200, [], JSON_NUMERIC_CHECK);
     }
+
+   
+
+    // ...
+    
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'Nome' => 'required',
+            'Categoria' => 'required',
+            'Preco' => 'required',
+            'Descricao' => 'required',
+            'Quantidade' => 'required',
+        ]);
+    
+        $item = ItensEstoque::find($id);
+    
+        if (!$item) {
+            return response()->json(['message' => 'Item não encontrado'], 404);
+        }
+    
+        // Atualização usando script manual, metodo save tava dando pau
+        DB::table('itensestoque')
+            ->where('id', $id)
+            ->update([
+                'Nome' => $request->input('Nome'),
+                'Categoria' => $request->input('Categoria'),
+                'Preco' => $request->input('Preco'),
+                'Descricao' => $request->input('Descricao'),
+                'Quantidade' => $request->input('Quantidade'),
+                'updated_at' => Carbon::now('America/Sao_Paulo')->format('Y-m-d H:i:s')
+            ]);
+    
+        
+        $item = ItensEstoque::find($id);
+    
+        return response()->json(['message' => 'Item atualizado com sucesso', 'item' => $item], 200);
+    }
+    
+    
+    
+
+    
 }

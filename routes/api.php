@@ -21,6 +21,9 @@ Route::post('/itens-estoque', 'App\Http\Controllers\ItensEstoqueController@store
 
 Route::get('/itens-estoque/{categoria?}/{id?}', 'App\Http\Controllers\ItensEstoqueController@index');
 
+Route::put('/itens-estoque/{id}', 'App\Http\Controllers\ItensEstoqueController@update');
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

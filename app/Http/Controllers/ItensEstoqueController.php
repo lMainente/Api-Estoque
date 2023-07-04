@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\DB;
 
+
 class ItensEstoqueController extends Controller
 {
     public function index($categoria = null, $id = null)
@@ -101,9 +102,25 @@ class ItensEstoqueController extends Controller
     
         return response()->json(['message' => 'Item atualizado com sucesso', 'item' => $item], 200);
     }
-    
-    
-    
 
-    
+
+    public function delete($id)
+    {
+
+        $item= ItensEstoque::find($id);
+
+
+
+        if (!$item){
+            return ["result"=>"Naõ foi Possivel Encontrar este item".$id];
+        }
+
+        
+        DB::table('itensestoque')
+            ->where('id', $id)
+            ->delete();
+            
+        return response()->json(['message' => 'item excluido com Sucesso' ]);  
+
+    } 
 }

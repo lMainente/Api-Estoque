@@ -23,6 +23,7 @@ Route::get('/itens-estoque/{categoria?}/{id?}', 'App\Http\Controllers\ItensEstoq
 
 Route::put('/itens-estoque/{id}', 'App\Http\Controllers\ItensEstoqueController@update');
 
+Route::delete('/delete/{id}', 'App\Http\Controllers\ItensEstoqueController@delete');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

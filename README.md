@@ -8,4 +8,4 @@
 </p>
 
 
-Last Att -    Parametros URL p listagem - departamento + id 
+Last Att -    CRUD completo, inciar etapa de token e login
